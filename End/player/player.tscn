@@ -33,22 +33,22 @@ tracks/0/keys = {
 [sub_resource type="GradientTexture" id=6]
 gradient = SubResource( 5 )
 
-[sub_resource type="Curve" id=9]
+[sub_resource type="Curve" id=7]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=10]
-curve = SubResource( 9 )
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=9]
 trail_divisor = 2
 gravity = Vector3( 0, 1.8, 0 )
 initial_velocity = 0.5
 scale = 1.5
 scale_random = 1.0
-scale_curve = SubResource( 10 )
+scale_curve = SubResource( 8 )
 color_ramp = SubResource( 6 )
 
-[sub_resource type="SphereMesh" id=8]
+[sub_resource type="SphereMesh" id=10]
 radius = 0.5
 height = 1.0
 
@@ -87,5 +87,8 @@ amount = 20
 randomness = 1.0
 fract_delta = false
 local_coords = false
-process_material = SubResource( 7 )
-draw_pass_1 = SubResource( 8 )
+process_material = SubResource( 9 )
+draw_pass_1 = SubResource( 10 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+

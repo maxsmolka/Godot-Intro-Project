@@ -67,10 +67,8 @@ func _process_movement(delta: float) -> void:
 	if x != 0 || z != 0:
 		$DustFX.emitting = true
 		
+		
 
-	
-	
-	
 	
 	
 	

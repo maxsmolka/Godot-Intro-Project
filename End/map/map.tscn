@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://map/map.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://map/texture_1.png" type="Texture" id=2]
 [ext_resource path="res://map/Plattformen.gd" type="Script" id=3]
+[ext_resource path="res://map/sammelTeile.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Environment" id=5]
 background_mode = 1
@@ -15,7 +16,6 @@ fog_depth_begin = 566.3
 fog_depth_end = 794.7
 tonemap_mode = 2
 ssao_enabled = true
-glow_enabled = true
 glow_intensity = 5.76
 glow_strength = 1.14
 
@@ -87,6 +87,7 @@ material/2 = null
 shape = SubResource( 4 )
 
 [node name="Plattformen" type="Spatial" parent="."]
+editor/display_folded = true
 script = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Plattformen"]
@@ -115,5 +116,14 @@ physics_material_override = SubResource( 10 )
 [node name="CollisionShape" type="CollisionShape" parent="Plattformen/Pattform_2/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 11 )
+
+[node name="sammelTeile_1" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -76.792 )
+
+[node name="sammelTeile_2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.53214, 0, 68.7996 )
+
+[node name="sammelTeile_3" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60.2453, 36.3689, -1.62615 )
 
 [connection signal="input_event" from="Plattformen/Pattform_2/StaticBody" to="Plattformen/Pattform_2" method="_on_StaticBody_input_event"]
