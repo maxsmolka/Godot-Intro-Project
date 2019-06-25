@@ -14,15 +14,20 @@ var direction_x : float = 1.0
 var direction_z : float = 1.0
 var is_dead : bool = false
 
+onready var animation_player : AnimationPlayer
+
 var actions : = {
 	"move_up":"move_up",
 	"move_down":"move_down",
 	"move_left": "move_left",
 	"move_right": "move_right",
-	"jump": "jump"
+	"jump": "jump",
+	"dash": "dash"
 }
 
 func _ready() -> void:
+	animation_player = $AnimPlayer
+	animation_player.play("idle")
 	starting_position = translation
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,8 +41,7 @@ func _physics_process(delta: float) -> void:
 func _process_movement(delta: float) -> void:
 	var motion_vec := Vector3()
 	
-	if !$VisibilityNotifier.is_on_screen():
-		if translation.y < -50:
+	if translation.y < -50:
 			translation = starting_position
 	
 	motion_vec.x = int(Input.get_action_strength(actions.move_right)) - int(Input.get_action_strength(actions.move_left))
