@@ -1,4 +1,44 @@
-[gd_scene format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://font/Comfortaa-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Count.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -100.0
+margin_top = 10.0
+margin_right = 100.0
+margin_bottom = 50.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_right = 109.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 1 )
+text = "Boxes: "
+align = 1
+valign = 1
+
+[node name="Count" type="Label" parent="HBoxContainer"]
+margin_left = 113.0
+margin_right = 200.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 2 )
+text = "0 "
+align = 1
+valign = 1
+script = ExtResource( 2 )
