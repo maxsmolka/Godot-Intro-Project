@@ -16,15 +16,6 @@ var is_dead : bool = false
 
 onready var animation_player : AnimationPlayer
 
-var actions : = {
-	"move_up":"move_up",
-	"move_down":"move_down",
-	"move_left": "move_left",
-	"move_right": "move_right",
-	"jump": "jump",
-	"dash": "dash"
-}
-
 func _ready() -> void:
 	animation_player = $AnimPlayer
 	animation_player.play("idle")
@@ -46,8 +37,8 @@ func _process_movement(delta: float) -> void:
 			
 		
 	
-	motion_vec.x = int(Input.get_action_strength(actions.move_right)) - int(Input.get_action_strength(actions.move_left))
-	motion_vec.z = int(Input.get_action_strength(actions.move_down)) - int(Input.get_action_strength(actions.move_up))
+	motion_vec.x = int(Input.get_action_strength("move_right")) - int(Input.get_action_strength("move_left"))
+	motion_vec.z = int(Input.get_action_strength("move_down")) - int(Input.get_action_strength("move_up"))
 			
 	direction_x = motion_vec.x
 	var desired_x_velocity = direction_x * move_speed
@@ -59,11 +50,22 @@ func _process_movement(delta: float) -> void:
 	var weight_z = deceleration * delta if desired_x_velocity == 0 else acceleration * delta
 	velocity.z = lerp(velocity.z, desired_z_velocity, weight_z) 
 	
-	if Input.is_action_just_pressed(actions.jump) and is_on_floor():
+	
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	elif is_on_floor() or is_on_ceiling():
+		velocity.y = 0.0
+	
+	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = jump_force
 		
-	velocity.y -= gravity * delta
-	move_and_slide(velocity, Vector3.UP)
+	var moving = move_and_slide(velocity, Vector3.UP)
+	var x = round(abs(moving.x))
+	var z = round(abs(moving.z))
+	if x == 0 || z == 0:
+		$DustFX.emitting = false
+	if x != 0 || z != 0:
+		$DustFX.emitting = true
 		
 
 	
