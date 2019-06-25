@@ -41,8 +41,10 @@ func _physics_process(delta: float) -> void:
 func _process_movement(delta: float) -> void:
 	var motion_vec := Vector3()
 	
-	if translation.y < -50:
+	if !$VisibilityNotifier.is_on_screen():
 			translation = starting_position
+			
+		
 	
 	motion_vec.x = int(Input.get_action_strength(actions.move_right)) - int(Input.get_action_strength(actions.move_left))
 	motion_vec.z = int(Input.get_action_strength(actions.move_down)) - int(Input.get_action_strength(actions.move_up))
