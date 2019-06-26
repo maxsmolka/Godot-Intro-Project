@@ -7,7 +7,6 @@ export var offset : = Vector3(0,13,35)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player_ref = get_tree().get_nodes_in_group("player")
-	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -15,4 +14,3 @@ func _physics_process(delta):
 	var smoothedPosition : Vector3 = lerp(transform.origin, desiredPosition, smoothSpeed * delta)
 	
 	transform.origin = smoothedPosition
-	pass
